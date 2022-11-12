@@ -13,6 +13,13 @@ class QuestionsController < ApplicationController
     render json: @question
   end
 
+  # FILTER /filter?
+
+  def filter
+    @questions = Question.where("category_id = ?", params[:cat]).where("exam_id = ?", params[:col])
+    render json: @questions
+  end
+
   # POST /questions
   def create
     @question = Question.new(question_params)
