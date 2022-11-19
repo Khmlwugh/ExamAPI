@@ -13,14 +13,6 @@ class QuestionsController < ApplicationController
     render json: @question
   end
 
-  
-  #def random
-  #  @questions = 
-  #  render json: @questions
-  #end
-
-  # FILTER /filter?
-
   def filter
     if params[:cat] and params[:col]
       @questions = Question.where("category_id = ?", params[:cat]).where("exam_id = ?", params[:col])
@@ -29,7 +21,9 @@ class QuestionsController < ApplicationController
     elsif params[:col]
       @questions = Question.where("category_id = ?", params[:col])
     end
-    render json: @questions
+    times = params[:number] ? params[:number] : 1 
+    @test = @questions.sample(times.to_i)
+    render json: @test
   end
 
   # POST /questions
