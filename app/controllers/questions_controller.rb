@@ -21,8 +21,8 @@ class QuestionsController < ApplicationController
     elsif params[:col]
       @questions = Question.where("category_id = ?", params[:col])
     end
-    times = params[:number] ? params[:number] : 1 
-    @test = @questions.sample(times.to_i)
+    #times = params[:number] ? params[:number] : 1 
+    @test = @questions.sample()
     render json: @test
   end
 
